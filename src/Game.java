@@ -34,7 +34,7 @@ public class Game {
 				return;
 			}
 			else if(players[i].getValue() > 21){
-				players[i].cards[1].setValue(i);
+				players[i].cards[1].setValue(1);
 			}
         }
 
