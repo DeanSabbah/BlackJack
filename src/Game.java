@@ -5,6 +5,7 @@ public class Game {
     private Deck deck;
     private int numPlayers;
 	private int turn = 1;
+	private int numBusted = 0;
     public Game(Hand[] players, Deck deck, int numPlayers){
         this.players = players;
         this.deck = deck;
@@ -45,7 +46,7 @@ public class Game {
 				winner = this.players[i];
 			}
 		}
-		System.out.println(winner.getName() + " has won the game with a value of " + winner.getValue());
+		System.out.println(winner.getName() + " has won the game.");
 		return;
     }
     
@@ -65,6 +66,7 @@ public class Game {
 			}
 			if(this.players[currPlayer].getValue() > 21){
 				this.players[currPlayer].setBusted(true);
+				this.numBusted++;
 				System.out.println(this.players[currPlayer].getName() + " has busted.");
 				return;
 			}
@@ -72,16 +74,17 @@ public class Game {
 		else if(this.players[currPlayer].getValue() == 21){
 			return;
 		}
-		else{
-			turn();
-		}
 		return;
 	}
 
 	public void turn(){
 		int curPlayer = this.turn%this.numPlayers;
 		System.out.println("-------------------------------------------------------");
-		if(curPlayer == 0){
+		if(this.numBusted == this.numPlayers - 1){
+			System.out.println("All players have busted. Dealer wins.");
+			return;
+		}
+		else if(curPlayer == 0){
 			this.players[0].revealCards();
 			System.out.println("Dealers's cards: " + this.players[0].cardsToString() + "value: " + this.players[0].getValue() + "\n");
 			while(this.players[0].getValue() < 17){
@@ -102,14 +105,36 @@ public class Game {
 			catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			if (input.toLowerCase().equals("hit")) {
-				hit(curPlayer);
-			}
-			else if(!input.toLowerCase().equals("pass")) {
+			while(!input.toLowerCase().equals("hit") && !input.toLowerCase().equals("pass")){
 				System.out.println("Invalid input. Please enter 'hit' or 'pass'.");
-				turn();
-				return;
+				try {
+					input = scanner.nextLine();
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			while (input.toLowerCase().equals("hit")){
+				hit(curPlayer);
+				if(this.players[curPlayer].getBusted()){
+					break;
+				}
+				System.out.println("Would you like to hit or pass?");
+				try {
+					input = scanner.nextLine();
+				} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				while(!input.toLowerCase().equals("hit") && !input.toLowerCase().equals("pass")){
+					System.out.println("Invalid input. Please enter 'hit' or 'pass'.");
+					try {
+						input = scanner.nextLine();
+					} 
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}
 			changeTurn();
 		}
