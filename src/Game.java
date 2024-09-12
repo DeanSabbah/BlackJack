@@ -41,6 +41,12 @@ public class Game {
 		// game starts
 		turn();
 		Hand winner = this.players[0];
+		for(int i = 0; i < this.numPlayers; i++){
+			if(!this.players[i].getBusted()){
+				winner = this.players[i];
+				break;
+			}
+		}
 		for(int i = 1; i < this.numPlayers; i++){
 			if(this.players[i].getValue() > winner.getValue() && !this.players[i].getBusted()){
 				winner = this.players[i];
