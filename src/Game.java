@@ -61,6 +61,7 @@ public class Game {
 				}
 				if(card.isAce() && card.getValue() == 11){
 					card.setValue(1);
+					System.out.println(this.players[currPlayer].getName() + "'s cards:" + this.players[currPlayer].cardsToString() + "value: " + this.players[currPlayer].getValue());
 					break;
 				}
 			}
