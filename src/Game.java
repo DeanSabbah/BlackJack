@@ -119,6 +119,10 @@ public class Game {
 				if(this.players[curPlayer].getBusted()){
 					break;
 				}
+				else if(this.players[curPlayer].getValue() == 21){
+					System.out.println("Max value reached.");
+					break;
+				}
 				System.out.println("Would you like to hit or pass?");
 				try {
 					input = scanner.nextLine();
