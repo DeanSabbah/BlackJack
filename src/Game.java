@@ -40,6 +40,7 @@ public class Game {
 
 		// game starts
 		turn();
+
 		Hand winner = this.players[0];
 		for(int i = 0; i < this.numPlayers; i++){
 			if(!this.players[i].getBusted()){
@@ -68,7 +69,9 @@ public class Game {
 				if(card.isAce() && card.getValue() == 11){
 					card.setValue(1);
 					System.out.println(this.players[currPlayer].getName() + "'s cards:" + this.players[currPlayer].cardsToString() + "value: " + this.players[currPlayer].getValue());
-					break;
+					if(this.players[currPlayer].getValue() <= 21){
+						break;
+					}
 				}
 			}
 			if(this.players[currPlayer].getValue() > 21){
@@ -85,10 +88,14 @@ public class Game {
 	}
 
 	public void turn(){
+		// Burn a card at the beginning of each turn
+		this.deck.deal();
 		int curPlayer = this.turn%this.numPlayers;
-		System.out.println("-------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------");
 		if(this.numBusted == this.numPlayers - 1){
 			System.out.println("All players have busted. Dealer wins.");
+			this.players[0].revealCards();
+			System.out.println("Dealers's cards: " + this.players[0].cardsToString() + "value: " + this.players[0].getValue() + "\n");
 			return;
 		}
 		else if(curPlayer == 0){

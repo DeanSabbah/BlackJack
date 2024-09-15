@@ -2,7 +2,9 @@ public class Deck {
     private Card[] cards;
     private Card topCard;
 	private int numCards;
+    private int numDecks;
     public Deck(int numDecks) {
+        this.numDecks = numDecks;
 		this.cards = new Card[52 * numDecks];
         String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9",
@@ -54,4 +56,7 @@ public class Deck {
 	public int getNumCards(){
 		return numCards;
 	}
+    public int getNumDecks(){
+        return numDecks;
+    }
 }
