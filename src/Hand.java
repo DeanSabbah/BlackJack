@@ -12,22 +12,23 @@ public class Hand {
         cards[numCards] = card;
         numCards++;
     }
-    public int getNumCards() {
-        return numCards;
-    }
     public Card[] getCards() {
         return cards;
     }
-	public String cardsToString(){
-		String s = "";
-		for (int i = 0; i < numCards; i++) {
-			s += cards[i] + ", ";
-		}
-		return s;
-	}
-	public Card getCard(int i) {
+	public Card getCards(int i) {
 		return cards[i];
 	}
+    public int getNumCards() {
+        return numCards;
+    }
+    public void resetNumCards(){
+        numCards = 0;
+    }
+    public void revealCards() {
+        for (int i = 0; i < numCards; i++) {
+            cards[i].flip(true);
+        }
+    }
     public int getValue() {
         int value = 0;
         for (int i = 0; i < numCards; i++) {
@@ -37,18 +38,6 @@ public class Hand {
         }
         return value;
     }
-    public String toString() {
-        String s = "";
-        for (int i = 0; i < numCards; i++) {
-            s += cards[i] + "\n";
-        }
-        return s;
-    }
-    public void revealCards() {
-        for (int i = 0; i < numCards; i++) {
-            cards[i].flip(true);
-        }
-    }
     public int getPrivateValue() {
         int value = 0;
         for (int i = 0; i < numCards; i++) {
@@ -56,16 +45,27 @@ public class Hand {
         }
         return value;
     }
-    public String getName() {
-        return name;
-    }
-	public void setBusted(boolean isBusted){
-		this.isBusted = isBusted;
+	public void setBusted(boolean bust){
+		isBusted = bust;
 	}
 	public boolean getBusted(){
 		return isBusted;
 	}
-    public void resetNumCards(){
-        numCards = 0;
+    public String getName() {
+        return name;
     }
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < numCards; i++) {
+            s += cards[i] + "\n";
+        }
+        return s;
+    }
+	public String cardsToString(){
+		String s = "";
+		for (int i = 0; i < numCards; i++) {
+			s += cards[i] + ", ";
+		}
+		return s;
+	}
 }
