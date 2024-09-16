@@ -27,6 +27,7 @@ public class GameTester {
             numPlayers = scanner.nextInt() + 1;
             System.out.println("Enter the number of decks: ");
             numDecks = scanner.nextInt();
+            scanner.nextLine();
         } catch (Exception e) {
         System.out.println(e.toString());
         }
@@ -42,7 +43,6 @@ public class GameTester {
         String again = "yes";
         while (again.equals("yes")) {
             new Game(players, new Deck(numDecks), (numPlayers));
-            scanner.nextLine();
             System.out.println("Play again? (Yes or No)");
             again = scanner.nextLine().toLowerCase();
             while(!again.equals("yes") && !again.equals("no")){
