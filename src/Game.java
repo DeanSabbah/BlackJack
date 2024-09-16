@@ -11,17 +11,7 @@ public class Game {
         this.deck = deck;
         this.numPlayers = numPlayers;
         deck.shuffle();
-        this.players[0] = new Dealer(new Card[11], 0, "Dealer");
-        Scanner scanner = new Scanner(System.in);
-        try {
-            for (int i = 1; i < numPlayers; i++) {
-                System.out.println("Enter player " + i + "'s name: ");
-                String name = scanner.nextLine();
-                addPlayer(this, name, i);
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+
         this.players[0].addCard(deck.deal(false));
         for (int i = 1; i < numPlayers; i++) {
             players[i].addCard(deck.deal());
@@ -168,19 +158,6 @@ public class Game {
 		System.out.println("Game is done.");
 		return;
 	}
-
-    public void addPlayer(Game game, String name, int index){
-        while(name.equals("Dealer")){
-            System.out.println("Invalid name. Please enter a different name.");
-            Scanner scanner = new Scanner(System.in);
-            try {
-                name = scanner.nextLine();
-            } catch (Exception e) {
-                System.out.println("Invalid input.");
-            }
-        }
-        game.players[index] = new Hand(new Card[11], 0, name);
-    }
 
     public void printPlayers(){
         for (int i = 0; i < this.numPlayers; i++) {

@@ -65,4 +65,7 @@ public class Hand {
 	public boolean getBusted(){
 		return isBusted;
 	}
+    public void resetNumCards(){
+        numCards = 0;
+    }
 }
