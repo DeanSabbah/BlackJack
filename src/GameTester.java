@@ -15,7 +15,7 @@ public class GameTester {
                     }
                 }
         
-        players[index] = new Hand(new Card[11], 0, name);
+        players[index] = new Player(name);
     }
     
     public static void main(String[] args) {
@@ -34,28 +34,35 @@ public class GameTester {
 
         Hand players[] = new Hand[numPlayers];
         
-        players[0] = new Dealer(new Card[11], 0, "Dealer");
+        players[0] = new Dealer();
         
         for (int i = 1; i < numPlayers; i++) {
             addPlayer(players, i);
         }
-		
+        
+        Game game = new Game(players, new Deck(numDecks), numPlayers);
+        
         String again = "yes";
-        while (again.equals("yes")) {
-            new Game(players, new Deck(numDecks), (numPlayers));
-            System.out.println("Play again? (Yes or No)");
-            again = scanner.nextLine().toLowerCase();
-            while(!again.equals("yes") && !again.equals("no")){
-                System.out.println("Please enter yes or no.");
+        while (again.charAt(0) == 'y') {
+            if(!game.getEnd()){
+                System.out.println("Play again? (Yes or No)");
                 again = scanner.nextLine().toLowerCase();
+                while(!(again.charAt(0) == 'y') && !(again.charAt(0) == 'n')){
+                    System.out.println("Please enter yes or no.");
+                    again = scanner.nextLine().toLowerCase();
+                }
             }
-            if(again.equals("yes")){
+            if(again.charAt(0) == 'y'){
                 for(int i = 0; i < numPlayers; i++){
                     players[i].cards = new Card[11];
                     players[i].resetNumCards();
                     players[i].setBusted(false);
                 }
             }
+            else{
+                break;
+            }
+            game = new Game(players, new Deck(numDecks), (numPlayers));
         }
         scanner.close();
     }

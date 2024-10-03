@@ -1,6 +1,6 @@
 public class Dealer extends Hand {
-    public Dealer(Card[] cards, int numCards, String name) {
-        super(cards, numCards, name);
+    public Dealer() {
+        this.name = "Dealer";
     }
     public void revealCards() {
         for (int i = 0; i < getNumCards(); i++) {

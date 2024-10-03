@@ -1,16 +1,30 @@
 public class Card {
-    private String suit;
+    private int suit;
     private String rank;
     private int value;
     private boolean faceUp = true;
     boolean ace = false;
 
-    public Card(String suit, String rank, int value) {
+    public Card(int suit, String rank, int value) {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
     }
     public String getSuit() {
+        switch (suit) {
+            case 0:
+                return "Clubs";
+            case 1:
+                return "Diamonds";
+            case 2:
+                return "Hearts";
+            case 3:
+                return "Spades";
+            default:
+                return "Invalid Suit";
+        }
+    }
+    public int getSuitValue() {
         return suit;
     }
     public String getRank() {
@@ -36,7 +50,18 @@ public class Card {
 	}
     public String toString() {
         if (faceUp) {
-            return rank + " of " + suit;
+            switch (suit) {
+                case 0:
+                    return rank + " of Clubs";
+                case 1:
+                    return rank + " of Diamonds";
+                case 2:
+                    return rank + " of Hearts";
+                case 3:
+                    return rank + " of Spades";
+                default:
+                    return "Invalid Suit";
+            }
         }
         else {
             return "Face Down";
