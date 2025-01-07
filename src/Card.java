@@ -1,17 +1,20 @@
 public class Card {
-    private String suit;
+    private Suit suit;
     private String rank;
     private int value;
     private boolean faceUp = true;
     boolean ace = false;
 
-    public Card(String suit, String rank, int value) {
+    public Card(Suit suit, String rank, int value) {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
     }
     public String getSuit() {
-        return suit;
+        return suit.toString();
+    }
+    public int getSuitValue() {
+        return suit.ordinal();
     }
     public String getRank() {
         return rank;
@@ -36,7 +39,7 @@ public class Card {
 	}
     public String toString() {
         if (faceUp) {
-            return rank + " of " + suit;
+            return rank + " of " + suit.toString();
         }
         else {
             return "Face Down";

@@ -6,6 +6,7 @@ public class Game {
     private int numPlayers;
 	private int turn = 1;
 	private int numBusted = 0;
+	private boolean end = false;
     public Game(Hand[] players, Deck deck, int numPlayers){
         this.players = players;
         this.deck = deck;
@@ -31,10 +32,20 @@ public class Game {
 		// game starts
 		turn();
 
-		endGame();
-		return;
+		end = endGame();
+		
+		return; 
     }
     
+	/**
+	 * Hit function for the player,
+	 * Adds a card to the player's hand,
+	 * Checks if the player has busted.
+	 * If the player has busted, the player is marked as busted.
+	 * If the player has an ace and their hand's value is greater than 21, the value of the ace is changed to 1.
+	 * @param currPlayer: the current player's index
+	 * @return void
+	 */
     public void hit(int currPlayer){
 		this.players[currPlayer].addCard(deck.deal());
 		System.out.println(this.players[currPlayer].getName() + "'s cards:" + this.players[currPlayer].cardsToString() + "value: " + this.players[currPlayer].getValue());
@@ -117,15 +128,15 @@ public class Game {
 				}
 				System.out.println("Would you like to hit or pass?");
 				try {
-					input = scanner.nextLine();
+					input = scanner.nextLine().toLowerCase();
 				} 
 				catch (Exception e) {
 					e.printStackTrace();
 				}
-				while(!input.toLowerCase().equals("hit") && !input.toLowerCase().equals("pass")){
+				while(!input.equals("hit") && !input.equals("pass")){
 					System.out.println("Invalid input. Please enter 'hit' or 'pass'.");
 					try {
-						input = scanner.nextLine();
+						input = scanner.nextLine().toLowerCase();
 					} 
 					catch (Exception e) {
 						e.printStackTrace();
@@ -142,26 +153,37 @@ public class Game {
 		turn();
 	}
 
-    public void endGame(){
+    public boolean endGame(){
 		Hand winner = this.players[0];
-		for(int i = 0; i < this.numPlayers; i++){
-			if(!this.players[i].getBusted()){
-				winner = this.players[i];
-				break;
-			}
-		}
 		for(int i = 1; i < this.numPlayers; i++){
-			if(this.players[i].getValue() > winner.getValue() && !this.players[i].getBusted()){
+			if(this.players[i].getBusted()){
+				if(i < this.numPlayers - 1){
+					winner = this.players[i + 1];
+				}
+				else if(i == 0){
+					winner = this.players[1];
+				}
+				continue;
+			}
+			if(this.players[i].getValue() > winner.getValue()){
 				winner = this.players[i];
+			}
+			else if(this.players[i].getValue() == winner.getValue()){
+				System.out.println("The game is pushed.");
+				return true;
 			}
 		}
 		System.out.println(winner.getName() + " has won the game.");
-		return;
+		return false;
 	}
 
     public void printPlayers(){
         for (int i = 0; i < this.numPlayers; i++) {
             System.out.println(this.players[i].getName());
         }
-    }        
+    }
+	
+	public boolean getEnd(){
+		return end;
+	}
 }

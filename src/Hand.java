@@ -1,13 +1,9 @@
-public class Hand {
+public abstract class Hand {
     Card[] cards = new Card[11];
     private int numCards = 0;
-    private String name;
+    protected String name;
 	private boolean isBusted = false;
-    public Hand(Card[] cards, int numCards, String name){
-        this.cards = cards;
-        this.numCards = numCards;
-        this.name = name;
-    }
+
     public void addCard(Card card) {
         cards[numCards] = card;
         numCards++;
@@ -42,6 +38,22 @@ public class Hand {
         int value = 0;
         for (int i = 0; i < numCards; i++) {
             value += cards[i].getValue();
+        }
+        return value;
+    }
+    public int getSuitValue() {
+        int value = 0;
+        for(int i = 0; i < numCards; i++){
+            if(cards[i].isFaceUp()){
+                value += cards[i].getSuitValue();
+            }
+        }
+        return value;
+    }
+    public int getPrivateSuitValue() {
+        int value = 0;
+        for(int i = 0; i < numCards; i++){
+            value += cards[i].getSuitValue();
         }
         return value;
     }
