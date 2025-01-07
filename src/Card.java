@@ -31,7 +31,7 @@ public class Card {
 	public void flip(){
 		faceUp = !faceUp;
 	}
-	public void flip(boolean faceUp){
+	public void setFaceUp(boolean faceUp){
 		this.faceUp = faceUp;
 	}
 	public boolean isFaceUp(){

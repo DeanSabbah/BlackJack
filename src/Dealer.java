@@ -4,7 +4,7 @@ public class Dealer extends Hand {
     }
     public void revealCards() {
         for (int i = 0; i < getNumCards(); i++) {
-            getCards(i).flip(true);
+            getCards(i).setFaceUp(true);
         }
     }
     public int getPrivateValue() {

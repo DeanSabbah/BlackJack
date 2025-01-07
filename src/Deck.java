@@ -6,8 +6,6 @@ public class Deck {
     public Deck(int numDecks) {
         this.numDecks = numDecks;
 		this.cards = new Card[52 * numDecks];
-        //String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
-        //int[] suits = {0, 1, 2, 3};
         Suit suits[] = {Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9",
                           "10", "Jack", "Queen", "King"};
@@ -38,7 +36,7 @@ public class Deck {
     }
     public Card deal(boolean faceUp) {
         topCard = cards[0];
-        topCard.flip(faceUp);
+        topCard.setFaceUp(faceUp);
         for (int i = 0; i < cards.length - 1; i++) {
             cards[i] = cards[i+1];
         }

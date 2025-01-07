@@ -22,7 +22,7 @@ public abstract class Hand {
     }
     public void revealCards() {
         for (int i = 0; i < numCards; i++) {
-            cards[i].flip(true);
+            cards[i].setFaceUp(true);
         }
     }
     public int getValue() {
