@@ -37,6 +37,15 @@ public class Game {
 		return; 
     }
     
+	/**
+	 * Hit function for the player,
+	 * Adds a card to the player's hand,
+	 * Checks if the player has busted.
+	 * If the player has busted, the player is marked as busted.
+	 * If the player has an ace and their hand's value is greater than 21, the value of the ace is changed to 1.
+	 * @param currPlayer: the current player's index
+	 * @return void
+	 */
     public void hit(int currPlayer){
 		this.players[currPlayer].addCard(deck.deal());
 		System.out.println(this.players[currPlayer].getName() + "'s cards:" + this.players[currPlayer].cardsToString() + "value: " + this.players[currPlayer].getValue());

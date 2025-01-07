@@ -42,17 +42,17 @@ public class GameTester {
         
         Game game = new Game(players, new Deck(numDecks), numPlayers);
         
-        String again = "yes";
-        while (again.charAt(0) == 'y') {
+        char again = 'y';
+        while (again == 'y') {
             if(!game.getEnd()){
                 System.out.println("Play again? (Yes or No)");
-                again = scanner.nextLine().toLowerCase();
-                while(!(again.charAt(0) == 'y') && !(again.charAt(0) == 'n')){
+                again = scanner.nextLine().toLowerCase().charAt(0);
+                while(!(again == 'y') && !(again == 'n')){
                     System.out.println("Please enter yes or no.");
-                    again = scanner.nextLine().toLowerCase();
+                    again = scanner.nextLine().toLowerCase().charAt(0);
                 }
             }
-            if(again.charAt(0) == 'y'){
+            if(again == 'y'){
                 for(int i = 0; i < numPlayers; i++){
                     players[i].cards = new Card[11];
                     players[i].resetNumCards();
