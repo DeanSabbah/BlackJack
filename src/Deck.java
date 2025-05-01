@@ -1,3 +1,6 @@
+import defs.Suit;
+import defs.Rank;
+
 public class Deck {
     private Card[] cards;
     private Card topCard;
@@ -7,15 +10,14 @@ public class Deck {
         this.numDecks = numDecks;
 		this.cards = new Card[52 * numDecks];
         Suit suits[] = {Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES};
-        String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9",
-                          "10", "Jack", "Queen", "King"};
+        Rank[] ranks = {Rank.ACE, Rank.TWO, Rank.THREE, Rank.FOUR, Rank.FIVE, Rank.SIX, Rank.SEVEN, Rank.EIGHT, Rank.NINE, Rank.TEN, Rank.JACK, Rank.QUEEN, Rank.KING};
         int[] values = {11,2,3,4,5,6,7,8,9,10,10,10,10};
         int i = 0;
         for(int k = 0; k < numDecks; k++){
 			for (int l = 0; l < 4; l++) {
 				for (int j = 0; j < ranks.length; j++) {
 					cards[i] = new Card(suits[l], ranks[j], values[j]);
-					if (cards[i].getRank().equals("Ace")){
+					if (cards[i].getRank().equals(Rank.ACE)){
 						cards[i].ace = true;
 					}
 					i++;

@@ -1,11 +1,14 @@
+import defs.Suit;
+import defs.Rank;
+
 public class Card {
     private Suit suit;
-    private String rank;
+    private Rank rank;
     private int value;
     private boolean faceUp = true;
     boolean ace = false;
 
-    public Card(Suit suit, String rank, int value) {
+    public Card(Suit suit, Rank rank, int value) {
         this.suit = suit;
         this.rank = rank;
         this.value = value;
@@ -16,7 +19,7 @@ public class Card {
     public int getSuitValue() {
         return suit.ordinal();
     }
-    public String getRank() {
+    public Rank getRank() {
         return rank;
     }
     public int getValue() {
